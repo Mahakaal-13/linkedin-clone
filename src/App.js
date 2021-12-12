@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import Feed from './App Body/Feed';
+import Login from './App Body/Login';
+import SideBar from './App Body/SideBar';
 import './App.css';
+import Header from './Header/Header';
+import { selectUser } from './redux/userSlice';
 
 function App() {
+
+
+  const user = useSelector(selectUser)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Header />
+
+      {!user ? <Login /> : (
+        <div className="app__body">
+          <SideBar />
+          <Feed />
+        </div>
+
+      )}
+
+      {/* <Widget/> */}
     </div>
   );
 }
